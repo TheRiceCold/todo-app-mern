@@ -7,4 +7,8 @@ app.use(express.json());
 
 const PORT = process.env.PORT;
 
+mongoose.connect(process.env.DB_CONNECT)
+  .then(() => console.log("Database Connected"))
+  .catch(error => console.log(error));
+
 app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));

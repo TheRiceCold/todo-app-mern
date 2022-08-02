@@ -7,7 +7,7 @@
     "start": "nodemon app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Dale Walter G. Hicban",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
