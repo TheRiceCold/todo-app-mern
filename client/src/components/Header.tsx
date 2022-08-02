@@ -4,7 +4,7 @@ import { FC } from "react";
 
 const Header: FC = () => {
   const date = new Date().toDateString();
-  const [activeFilter, setActiveFilter] = useState("all");
+  const [activeFilter, setActiveFilter] = useState<String>("all");
 
   const filterButtons = [
     {
@@ -75,6 +75,7 @@ const FilterButton = styled.button`
   cursor: pointer;
   padding: 3px 8px;
   border-radius: 20px;
+  text-transform: capitalize;
   ${({ active }) => {
     const background = active ? "#7996a5" : "0";
     const color = active ? "#fff" : "#8a9ca5";

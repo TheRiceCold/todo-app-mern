@@ -1,10 +1,12 @@
-import Header from "./components/Header";
 import styled from "styled-components";
+import Header from "./components/Header";
+import TaskList from "./components/TaskList";
 
 function App() {
   return (
     <Container>
       <Header />
+      <TaskList />
     </Container>
   );
 }
