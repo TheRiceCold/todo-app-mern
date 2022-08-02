@@ -16,7 +16,43 @@ const TaskList: FC = () => {
     <Container>
       <Item>
         <input type="checkbox" />
-        <label>First Todo</label>
+        <label>Todo 1</label>
+        <button>
+          <FiEdit2 
+            size={16} 
+            color={"#445963"} 
+            onClick={handleEdit}
+          />
+        </button>
+        <button>
+          <FiTrash2 
+            size={16} 
+            color="red" 
+            onClick={handleDelete}
+          />
+        </button>
+      </Item>
+      <Item>
+        <input type="checkbox" />
+        <label>Todo 2</label>
+        <button>
+          <FiEdit2 
+            size={16} 
+            color={"#445963"} 
+            onClick={handleEdit}
+          />
+        </button>
+        <button>
+          <FiTrash2 
+            size={16} 
+            color="red" 
+            onClick={handleDelete}
+          />
+        </button>
+      </Item>
+      <Item>
+        <input type="checkbox" />
+        <label>Todo 3</label>
         <button>
           <FiEdit2 
             size={16} 

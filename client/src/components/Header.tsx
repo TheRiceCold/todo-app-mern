@@ -48,7 +48,6 @@ const Header: FC = () => {
 export default Header;
 
 const Title = styled.h1`
-  margin: 0; 
   font-size: 20px;
   font-weight: 600;
   padding: 20px 20px 6px 20px;
@@ -67,7 +66,6 @@ const Tools = styled.div`
 `;
 
 const FilterButton = styled.button`
-  border: 0;
   background: 0;
   line-height: 1;
   color: #8a9ca5;
@@ -92,7 +90,6 @@ const Form = styled.form`
   margin-top: 10px;
   input {
     flex: 1;
-    border: 0;
     color: #455963;
     font-size: 16px;
     padding: 10px 20px;

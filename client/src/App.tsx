@@ -1,20 +1,19 @@
+import { FC } from "react";
 import styled from "styled-components";
 import Header from "./components/Header";
 import TaskList from "./components/TaskList";
 
-function App() {
-  return (
-    <Container>
-      <Header />
-      <TaskList />
-    </Container>
-  );
-}
+const App: FC = () => (
+  <Container>
+    <Header />
+    <TaskList />
+  </Container>
+);
 
 export default App;
 
 const Container = styled.main`
-  max-width: 400px;
+  max-width: 600px;
   width: 100%;
   margin: auto;
   background-color: #fff;

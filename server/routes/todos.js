@@ -2,7 +2,7 @@ const router = require("express").Router();
 const todoModel = require("../models/todo");
 
 module.exports = router
-  .post("/api/todos", async(req, res) => {
+  .post("/todos", async(req, res) => {
     try {
       const newTodo = new todoModel({ task: req.body.task });
       await newTodo.save();
@@ -11,11 +11,19 @@ module.exports = router
       res.json(error);
     }
   })
-  .get("/api/todos", async(req, res) => {
+  .get("/todos", async(req, res) => {
     try {
       const todos = await todoModel.find({});
       res.status(200).json(todos);
     } catch (error) {
+      res.json(error);
+    }
+  })
+  .put("/todos/:id", async(req, res) => {
+    try {
+      const updateTodo = await todoModel.findByIdAndUpdate(req.params.id, { $set: req.body });
+      res.status(200).json("Task has been updated successfully!");
+    } catch(error) {
       res.json(error);
     }
   })
