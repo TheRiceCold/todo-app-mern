@@ -27,3 +27,11 @@ module.exports = router
       res.json(error);
     }
   })
+  .delete("/todos/:id", async(req, res) => {
+    try {
+      const deleteTodo = await todoModel.findByIdAndDelete(req.params.id);
+      res.status(200).json("Task has been deleted");
+    } catch (error) {
+      res.json(error);
+    }
+  });
