@@ -21,4 +21,5 @@ const Container = styled.main`
   overflow: hidden;
   color: #445963;
   box-shadow: 0 20px 80px rgba(0, 0, 0, 0.3);
+  font-family: "DM sans", sans-serif;
 `;
