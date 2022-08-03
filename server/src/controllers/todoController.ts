@@ -12,8 +12,12 @@ const createTodo = async(req: Request, res: Response) => {
 };
 
 const getTodos = async(req: Request, res: Response) => {
+  let filter = { };
+  if (req.query.isCompleted)
+    filter = { isCompleted: req.query.isCompleted === "true" }
+
   try {
-    const todos = await Todo.find();
+    const todos = await Todo.find(filter);
     res.status(200).send(todos);
   } catch(error: any) {
     console.log(error);
