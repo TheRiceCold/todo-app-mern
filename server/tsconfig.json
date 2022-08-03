@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "diagnostics": true,
+    "esModuleInterop": true,
+    "types": ["jest"],
+    "noEmit": true
+  },
+  "included": [ "src/**/*" ],
+  "exclude": [
+    "node_modules",
+    "./node_modules",
+    "./node_modules/*"
+  ],
+  "compileOnSave": false
+}
