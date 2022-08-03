@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { FiTrash2, FiEdit2 } from "react-icons/fi";
 import { FC, useState } from "react";
 import TaskItem from "./TaskItem";
 

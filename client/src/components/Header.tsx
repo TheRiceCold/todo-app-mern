@@ -65,7 +65,7 @@ const Tools = styled.div`
   }
 `;
 
-const FilterButton = styled.button`
+const FilterButton = styled.button<{ active?: boolean }>`
   background: 0;
   line-height: 1;
   color: #8a9ca5;

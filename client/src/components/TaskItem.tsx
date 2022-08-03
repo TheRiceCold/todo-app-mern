@@ -1,6 +1,13 @@
 import styled from "styled-components";
+import { FiTrash2, FiEdit2 } from "react-icons/fi";
+import { FC } from "react";
 
-const TaskItem: FC = ({ label, id }) => {
+interface IProps {
+  label: string;
+  id: Number;
+};
+
+const TaskItem: FC<IProps> = ({ label, id }) => {
   const handleDelete = () => {
     alert(`Delete ${id}`);
   };

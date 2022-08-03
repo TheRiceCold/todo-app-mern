@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import Axios from "axios";
 import { 
   createContext,
   useContext,
@@ -7,28 +7,43 @@ import {
   FC,
 } from "react";
 
-interface ITodosContext {
-  createTodo: ({ 
-    title: string, 
-    description: string 
-  }) => Promise<AxiosResponse>,
-  getTodos: () => Promise<ITodo[]>,
-  getTodoById: (id: Number) => Promise<ITodo>,
-  updateTodo: () => Promise<AxiosResponse>,
-  deleteTodo: () => Promise<AxiosResponse>,
-};
+import ITodoContext from "../interfaces/ITodoContext";
 
-const TodosContext = createContext<ITodosContext>();
+const TodoContext = createContext({} as ITodoContext);
+export const useTodo = () => useContext(TodoContext);
 
 interface IProps {
   children: ReactNode | ReactNode[];
 };
 
-const TodosProvider: FC<IProps> = ({ children }) => {
+const TodoProvider: FC<IProps> = ({ children }) => {
+  const baseURL = "http://localhost:8080/api/";
+  const axios = Axios.create({ baseURL });
 
+  const createTodo = async(title: string, description: string) => 
+    await axios.post("todos", { title, description });
+
+  const getTodos = async() => { 
+    const { data } = await axios.get("todos");
+    return data;
+  }
+
+  const getTodoById = async (id: Number) => { 
+    const { data } = await axios.get(`todos/${id}`);
+    return data;
+  }
+
+  const updateTodo = async (
+    id: Number, 
+    title: string, 
+    description: string, 
+    isCompleted: Boolean,
+  ) => await axios.put(`todos/${id}`, { title, description, isCompleted });
+
+  const deleteTodo = async (id: Number) => await axios.delete(`todos/${id}`);
 
   return (
-    <TodosContext.Provider value={{
+    <TodoContext.Provider value={{
       createTodo,
       getTodos,
       getTodoById,
@@ -36,8 +51,8 @@ const TodosProvider: FC<IProps> = ({ children }) => {
       deleteTodo,
     }}>
 
-    </TodosContext.Provider>
+    </TodoContext.Provider>
   );
 };
 
-export default TodosProvider;
+export default TodoProvider;

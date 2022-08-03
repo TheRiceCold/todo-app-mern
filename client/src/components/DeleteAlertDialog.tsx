@@ -1,6 +1,13 @@
+import styled from "styled-components";
 import { FC } from "react";
 
-const DeleteAlertDialog: FC = ({ title, content, handleClick }) => (
+interface IProps {
+  title: string;
+  content: string;
+  handleClick: () => void;
+};
+
+const DeleteAlertDialog: FC<IProps> = ({ title, content, handleClick }) => (
   <Overlay>
     <Container>
       <button>x</button>
@@ -20,14 +27,14 @@ const Overlay = styled.div`
 
 `;
 
-const Container = style.div`
+const Container = styled.div`
 
 `;
 
-const Body = style.div`
+const Body = styled.div`
 
 `;
 
-const Footer = style.div`
+const Footer = styled.div`
 
 `;
