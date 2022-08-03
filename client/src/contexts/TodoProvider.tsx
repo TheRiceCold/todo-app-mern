@@ -26,12 +26,12 @@ const TodoProvider: FC<IProps> = ({ children }) => {
   const getTodos = async() => { 
     const { data } = await axios.get("todos");
     return data;
-  }
+  };
 
   const getTodoById = async (id: Number) => { 
     const { data } = await axios.get(`todos/${id}`);
     return data;
-  }
+  };
 
   const updateTodo = async (
     id: Number, 
@@ -50,7 +50,7 @@ const TodoProvider: FC<IProps> = ({ children }) => {
       updateTodo,
       deleteTodo,
     }}>
-
+      {children}
     </TodoContext.Provider>
   );
 };
