@@ -82,6 +82,7 @@ const Container = styled.div`
 const Item = styled.div`
   display: flex;
   flex-wrap: wrap;
+  cursor: pointer;
   padding: 12px 20px;
   align-items: center;
   border-top: 1px solid #eef0f5;
@@ -127,7 +128,6 @@ const Item = styled.div`
     display: none;
     overflow: hidden;
     background: none;
-    cursor: pointer;
     margin-left: 4px;
   }
 `;

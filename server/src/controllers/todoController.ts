@@ -3,8 +3,8 @@ import { Request, Response } from "express";
 
 const createTodo = async(req: Request, res: Response) => {
   try {
-    await Todo.create(req.body);
-    res.status(201).send("task added successfully!");
+    const todo = await Todo.create(req.body);
+    res.status(201).send(todo);
   } catch(error: any) {
     console.log(error);
     res.status(400).json(error);
@@ -14,7 +14,7 @@ const createTodo = async(req: Request, res: Response) => {
 const getTodos = async(req: Request, res: Response) => {
   let filter = { };
   if (req.query.isCompleted)
-    filter = { isCompleted: req.query.isCompleted === "true" }
+    filter = { isCompleted: req.query.isCompleted === "true" };
 
   try {
     const todos = await Todo.find(filter);
