@@ -1,14 +1,14 @@
-import express from "express";
+import express, { Application } from "express";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 import routes from "./src/routes";
 
-require("dotenv").config({ path: __dirname + "/.env"});
+const app: Application = express();
+const PORT: Number = Number(process.env.PORT) || 8080;
 
-const app = express();
-const PORT = process.env.PORT || 8080;
-
+dotenv.config();
 app.use(express.json());
-app.use("/api", routes);
+app.use("/api/todos", routes);
 
 app.listen(PORT, () => { 
   console.log(`listening on http://localhost:${PORT}`);
