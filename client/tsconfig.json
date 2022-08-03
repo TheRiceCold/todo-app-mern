@@ -18,11 +18,4 @@
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }],
-
-  "extends": "./tsconfig",
-  "exclude": [
-    " ./src/__tests__/**",
-    " ./src/__mocks__/**",
-    " ./src/test-utils"
-  ]
 }
