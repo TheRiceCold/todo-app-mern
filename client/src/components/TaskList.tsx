@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { FiTrash2, FiEdit2 } from "react-icons/fi";
-import { FC } from "react";
+import { FC, useState } from "react";
 
 const TaskList: FC = () => {
+  const [openDeleteDialog, setOpenDeleteDialog] = useState<Boolean>(false);
+  const [openEditModal, setOpenEditModal] = useState<Boolean>(false);
 
   const handleDelete = () => {
     alert("Delete");
@@ -101,6 +103,9 @@ const Item = styled.div`
     position: relative;
     background-color: #fff;
     border: 2px solid #bbbdc7;
+    &:hover {
+      border-color: #38bb90;
+    }
     &:checked {
       background-image: url("./checkmark.svg");
       background-size: 130%;

@@ -18,7 +18,7 @@ const getTodos = async(req: Request, res: Response) => {
 
   try {
     const todos = await Todo.find(filter);
-    res.status(200).send(todos);
+    res.status(200).json(todos);
   } catch(error: any) {
     console.log(error);
     res.status(400).json(error);
@@ -28,7 +28,7 @@ const getTodos = async(req: Request, res: Response) => {
 const getTodoById = async(req: Request, res: Response) => {
   try {
     const todo = await Todo.findById(req.params.id);
-    res.status(200).send(todo);
+    res.status(200).json(todo);
   } catch (error: any) {
     console.log(error);
     res.status(400).json(error);
@@ -37,8 +37,8 @@ const getTodoById = async(req: Request, res: Response) => {
 
 const updateTodo = async(req: Request, res: Response) => {
   try {
-    await Todo.findByIdAndUpdate(req.params.id, { $set: req.body });
-    res.status(200).send("task updated successfully!");
+    const todo = await Todo.findByIdAndUpdate(req.params.id, { $set: req.body });
+    res.status(200).json(todo);
   } catch (error: any) {
     console.log(error);
     res.status(400).json(error);
