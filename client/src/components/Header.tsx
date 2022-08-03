@@ -1,8 +1,12 @@
 import styled from "styled-components";
+import { FC, Dispatch, SetStateAction } from "react";
 import { useState } from "react";
-import { FC } from "react";
 
-const Header: FC = () => {
+interface IProps {
+  setOpenNewModal: Dispatch<SetStateAction<boolean>>;
+};
+
+const Header: FC<IProps> = ({ setOpenNewModal }) => {
   const date = new Date().toDateString();
   const [activeFilter, setActiveFilter] = useState<String>("all");
 
@@ -39,7 +43,7 @@ const Header: FC = () => {
         </div>
       </Tools>
       <NewButton>
-        <button>
+        <button onClick={() => setOpenNewModal(true)}>
           New Task
         </button>
       </NewButton>

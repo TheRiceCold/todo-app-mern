@@ -1,17 +1,66 @@
-import { FC } from "react";
+import { FC, useState, FormEvent } from "react";
 import styled from "styled-components";
-import Header from "./components/Header";
-import TaskList from "./components/TaskList";
-import TodoProvider from "./contexts/TodoProvider";
 
-const App: FC = () => (
-  <TodoProvider>
+import {
+  AlertDialog,
+  EditModal,
+  NewModal,
+  TaskList,
+  Header,
+} from "./components";
+
+const App: FC = () => {
+  const [openNewModal, setOpenNewModal] = useState<boolean>(false);
+  const [openEditModal, setOpenEditModal] = useState<boolean>(false);
+  const [openDeleteAlert, setOpenDeleteAlert] = useState<boolean>(false);
+
+  const handleEdit = (event: FormEvent) => {
+    event.preventDefault();
+    console.log("edit");
+  };
+
+  const handleDelete = () => { 
+    console.log("delete");
+  };
+
+  const handleCreate = (event: FormEvent) => {
+    event.preventDefault();
+    console.log("create");
+  };
+
+  return (
     <Container>
-      <Header />
-      <TaskList />
+      <Header setOpenNewModal={setOpenNewModal} />
+      <TaskList 
+        setOpenEditModal={setOpenEditModal}
+        setOpenDeleteAlert={setOpenDeleteAlert}
+      />
+      {openNewModal && 
+        <NewModal
+          title="New Task"
+          submitLabel="Create"
+          handleSubmit={handleCreate}
+          handleClose={() => setOpenNewModal(false)}
+        /> 
+      }
+      {openEditModal && 
+        <EditModal 
+          title="Edit Task"
+          submitLabel="Update"
+          handleSubmit={handleEdit}
+          handleClose={() => setOpenEditModal(false)}
+        /> 
+      }
+      {openDeleteAlert &&
+        <AlertDialog 
+          handleClick={handleDelete}
+          handleClose={() => setOpenDeleteAlert(false)}
+          title="Are you sure you want to delete this task?"
+        />
+      }
     </Container>
-  </TodoProvider>
-);
+  );
+}
 
 export default App;
 

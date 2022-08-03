@@ -1,11 +1,11 @@
 import Modal from "./Modal";
-import { FC } from "react";
+import { FC, FormEvent } from "react";
 
 interface IProps {
   title: string;
   submitLabel: string;
   handleClose: () => void;
-  handleSubmit: () => void;
+  handleSubmit: (e: FormEvent) => void;
 };
 
 const FormModal: FC<IProps> = ({ 
