@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
-import { FC, Dispatch, SetStateAction } from "react";
+import { FC } from "react";
 import Modal from "./Modal";
 
 interface IProps {
   title: string;
   handleClick: () => void;
-  handleClose: () => Dispatch<SetStateAction<boolean>>;
+  handleClose: () => void;
 };
 
 const DeleteAlertDialog: FC<IProps> = ({ 

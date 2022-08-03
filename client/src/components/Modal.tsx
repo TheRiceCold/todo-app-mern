@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { FC, ReactNode } from "react";
+import { ReactNode, FC } from "react";
 
 interface IProps {
   title: string;
   width: Number;
   height: Number;
+  handleClose: () => void;
   children: ReactNode | ReactNode[];
-  handleClose: () => Dispatch<SetStateAction<boolean>>;
 };
 
 const Modal: FC<IProps> = ({ 

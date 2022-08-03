@@ -34,6 +34,8 @@ const TaskList: FC = () => {
       }
       {openEditModal && 
         <EditModal 
+          title="EDIT TODO"
+          submitLabel="Update"
           handleSubmit={handleEdit}
           handleClose={() => setOpenEditModal(false)}
         /> 

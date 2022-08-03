@@ -3,7 +3,7 @@ import ITodo from "./ITodo";
 
 export default interface ITodoContext {
   createTodo: (title: string, description: string) => Promise<AxiosResponse>;
-  getTodos: () => Promise<ITodo[]>;
+  getTodos: (filter: string) => Promise<ITodo[]>;
   getTodoById: (id: Number) => Promise<ITodo>;
   updateTodo: (
     id: Number, 

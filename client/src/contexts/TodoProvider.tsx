@@ -23,8 +23,8 @@ const TodoProvider: FC<IProps> = ({ children }) => {
   const createTodo = async(title: string, description: string) => 
     await axios.post("todos", { title, description });
 
-  const getTodos = async() => { 
-    const { data } = await axios.get("todos");
+  const getTodos = async(filter: string) => { 
+    const { data } = await axios.get(`todos?isCompleted=${filter}`);
     return data;
   };
 

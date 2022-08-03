@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { FiTrash2, FiEdit2 } from "react-icons/fi";
-import { FC, Dispatch } from "react";
+import { FC, Dispatch, SetStateAction } from "react";
 
 interface IProps {
   label: string;
