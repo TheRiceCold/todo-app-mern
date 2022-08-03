@@ -12,23 +12,34 @@ describe("Todos API", () => {
           expect.arrayContaining([
             expect.objectContaining({
               title: expect.any(String),
-              done: expect.any(Boolean)
-            }),
+              isCompleted: expect.any(Boolean)
+            })
           ])
         );
       });
   });
 
   it("GET /api/todos/:id -> specific todo by ID", () => {
-
-  });
-
-  it("GET /api/todos/:id -> 404 if not found", () => {
-
   });
 
   it("POST /api/todos/ -> created todo", () => {
-
+    return request(app)
+      .post("/api/todos")
+      .send({
+        title: "some todo idk",
+        description: "some description idk"
+      })
+      .expect("Content-Type", /json/)
+      .expect(201)
+      .then(response => {
+        expect(response.body).toEqual(
+          expect.objectContaining({
+            title: "some todo idk",
+            description: "some description idk",
+            isCompleted: false
+          })
+        )
+      })
   });
 
   it("GET /api/todos -> validates request body", () => {

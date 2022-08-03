@@ -2,12 +2,15 @@ import { FC } from "react";
 import styled from "styled-components";
 import Header from "./components/Header";
 import TaskList from "./components/TaskList";
+import TodoProvider from "./contexts/TodoProvider";
 
 const App: FC = () => (
-  <Container>
-    <Header />
-    <TaskList />
-  </Container>
+  <TodoProvider>
+    <Container>
+      <Header />
+      <TaskList />
+    </Container>
+  </TodoProvider>
 );
 
 export default App;
