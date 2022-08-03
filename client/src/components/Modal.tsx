@@ -40,7 +40,6 @@ export default Modal;
 const Title = styled.h1`
   display: inline-block;
   text-align: center;
-  margin-top: 4px;
   font-size: 18px;
 `;
 

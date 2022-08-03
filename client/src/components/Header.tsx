@@ -38,9 +38,11 @@ const Header: FC = () => {
           ))}
         </div>
       </Tools>
-      <Form>
-        <input placeholder="Add a new task..." />
-      </Form>
+      <NewButton>
+        <button>
+          New Task
+        </button>
+      </NewButton>
     </header>
   ); 
 };
@@ -85,20 +87,42 @@ const FilterButton = styled.button<{ active?: boolean }>`
   }}
 `;
 
-const Form = styled.form`
+const NewButton = styled.div`
   display: flex;
-  margin-top: 10px;
-  input {
-    flex: 1;
-    color: #455963;
-    font-size: 16px;
-    padding: 10px 20px;
-    box-shadow: 0 -1px 0 #e2e4ea inset;
-    &::placeholder {
-      color: #a8b5bb;
-    }
-    &:focus {
-      box-shadow: 0 -1px 0 #bdcdd6 inset;
+  margin: 10px;
+  justify-content: center;
+  button {
+    color: #fff;
+    width: 100px;
+    height: 35px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+    background: cornflowerblue;
+    &:hover {
+      background: none;
+      color: cornflowerblue;
+      border: 2px solid cornflowerblue;
     }
   }
-`;
+`
+
+// const Form = styled.form`
+//   display: flex;
+//   margin-top: 10px;
+//   input {
+//     flex: 1;
+//     color: #455963;
+//     font-size: 16px;
+//     padding: 10px 20px;
+//     box-shadow: 0 -1px 0 #e2e4ea inset;
+//     &::placeholder {
+//       color: #a8b5bb;
+//     }
+//     &:focus {
+//       box-shadow: 0 -1px 0 #bdcdd6 inset;
+//     }
+//   }
+// `;

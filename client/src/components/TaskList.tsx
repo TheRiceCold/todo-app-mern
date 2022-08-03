@@ -2,12 +2,20 @@ import styled from "styled-components";
 import { FC, useState } from "react";
 
 import AlertDialog from "./AlertDialog";
-import EditModal from "./EditModal";
+import EditModal from "./FormModal";
 import TaskItem from "./TaskItem";
 
 const TaskList: FC = () => {
   const [openDeleteAlert, setOpenDeleteAlert] = useState<boolean>(false);
   const [openEditModal, setOpenEditModal] = useState<boolean>(false);
+
+  const handleEdit = () => {
+    console.log("edit");
+  };
+
+  const handleDelete = () => {
+    console.log("delete");
+  };
 
   return (
     <Container>
@@ -19,12 +27,17 @@ const TaskList: FC = () => {
       />
       {openDeleteAlert &&
         <AlertDialog 
-          title="Are you sure you want to delete this task?"
-          handleClick={() => console.log("delete")}
+          handleClick={handleDelete}
           handleClose={() => setOpenDeleteAlert(false)}
+          title="Are you sure you want to delete this task?"
         />
       }
-      {openEditModal && <EditModal /> }
+      {openEditModal && 
+        <EditModal 
+          handleSubmit={handleEdit}
+          handleClose={() => setOpenEditModal(false)}
+        /> 
+      }
     </Container>
   );
 };
