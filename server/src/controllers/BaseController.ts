@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Request, Response } from "expres";
+import { Request, Response } from "express";
  
 class BaseController {
   model: mongoose.Model<any, any>
