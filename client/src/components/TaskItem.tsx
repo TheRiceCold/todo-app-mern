@@ -1,42 +1,38 @@
 import styled from "styled-components";
 import { FiTrash2, FiEdit2 } from "react-icons/fi";
-import { FC } from "react";
+import { FC, Dispatch } from "react";
 
 interface IProps {
   label: string;
   id: Number;
+  setOpenEditModal: Dispatch<SetStateAction<boolean>>;
+  setOpenDeleteAlert: Dispatch<SetStateAction<boolean>>;
 };
 
-const TaskItem: FC<IProps> = ({ label, id }) => {
-  const handleDelete = () => {
-    alert(`Delete ${id}`);
-  };
-
-  const handleEdit = () => {
-    alert(`Edit ${id}`);
-  };
-
-  return (
-    <Item>
-      <input type="checkbox" />
-      <label>{label}</label>
-      <button>
-        <FiEdit2 
-          size={16} 
-          color={"#445963"} 
-          onClick={handleEdit}
-        />
-      </button>
-      <button>
-        <FiTrash2 
-          size={16} 
-          color="red" 
-          onClick={handleDelete}
-        />
-      </button>
-    </Item>
-  );
-};
+const TaskItem: FC<IProps> = ({ 
+  label, id, 
+  setOpenEditModal,
+  setOpenDeleteAlert,
+}) => (
+  <Item>
+    <input type="checkbox" />
+    <label>{label}</label>
+    <button>
+      <FiEdit2 
+        size={16} 
+        color={"#445963"} 
+        onClick={() => setOpenEditModal(true)}
+      />
+    </button>
+    <button>
+      <FiTrash2 
+        size={16} 
+        color="red" 
+        onClick={() => setOpenDeleteAlert(true)}
+      />
+    </button>
+  </Item>
+);
 
 export default TaskItem;
 
@@ -90,6 +86,7 @@ const Item = styled.div`
     padding: 0;
     height: 18px;
     display: none;
+    cursor: pointer;
     overflow: hidden;
     background: none;
     margin-left: 4px;

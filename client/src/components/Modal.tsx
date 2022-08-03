@@ -3,37 +3,45 @@ import { FC, ReactNode } from "react";
 
 interface IProps {
   title: string;
-  width: Number,
-  height: Number
+  width: Number;
+  height: Number;
   children: ReactNode | ReactNode[];
+  handleClose: () => Dispatch<SetStateAction<boolean>>;
 };
 
-const Modal: FC<IProps> = ({ title, width, height, children }) => (
-  <Overlay>
-    <Container>
-      <h1>{title}</h1>
+const Modal: FC<IProps> = ({ 
+  title, 
+  width, 
+  height, 
+  children,
+  handleClose
+}) => (
+  <Overlay onClick={handleClose}>
+    <main style={{
+      padding: 25,
+      display: "flex",
+      borderRadius: 12,
+      width: `${width}px`,
+      height: `${height}px`,
+      flexDirection: "column",
+      backgroundColor: "#fff",
+      boxShadow: "rgba(0, 0, 0, 0.2) 0 5px 15px",
+    }}
+      onClick={e => e.stopPropagation()}
+    >
+      <Title>{title}</Title>
       {children}
-    </Container>
+    </main>
   </Overlay>
 );
 
 export default Modal;
 
-const Container = styled.div`
-  width: 300px;
-  height: 200px;
-  display: flex;
-  padding: 25px;
-  border-radius: 12px;
-  background-color: #fff;
-  flex-direction: column;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 5px 15px;
-  h1 {
-    display: inline-block;
-    text-align: center;
-    margin-top: 4px;
-    font-size: 18px;
-  }
+const Title = styled.h1`
+  display: inline-block;
+  text-align: center;
+  margin-top: 4px;
+  font-size: 18px;
 `;
 
 const Overlay = styled.div`
@@ -41,7 +49,6 @@ const Overlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 99;
   display: flex;
   position: fixed;
   align-items: center;

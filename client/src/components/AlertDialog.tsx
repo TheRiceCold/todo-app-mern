@@ -1,31 +1,35 @@
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
-import { FC } from "react";
+import { FC, Dispatch, SetStateAction } from "react";
 import Modal from "./Modal";
 
 interface IProps {
   title: string;
-  content: string;
   handleClick: () => void;
+  handleClose: () => Dispatch<SetStateAction<boolean>>;
 };
 
-const DeleteAlertDialog: FC<IProps> = ({ title, content, handleClick }) => (
-  <Modal title={title}>
-    <Body>{content}</Body>
-    <Footer>
-      <button>no</button>
-      <button>yes</button>
-    </Footer>
+const DeleteAlertDialog: FC<IProps> = ({ 
+  title, 
+  handleClick,
+  handleClose,
+}) => (
+  <Modal 
+    title={title} 
+    width={300} 
+    height={175}
+    handleClose={handleClose}
+  >
+    <ActionButtons>
+      <button onClick={handleClose}>no</button>
+      <button onClick={handleClick}>yes</button>
+    </ActionButtons>
   </Modal>
 );
 
 export default DeleteAlertDialog;
 
-const Body = styled.div`
-  
-`;
-
-const Footer = styled.footer`
+const ActionButtons = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,9 +37,10 @@ const Footer = styled.footer`
     width: 75px;
     color: #fff;
     height: 35px;
-    margin: 10px;
+    margin: 15px;
     cursor: pointer;
     font-size: 14px;
+    margin-top: 30px;
     font-weight: 600;
     border-radius: 8px;
     text-transform: capitalize;

@@ -1,21 +1,30 @@
-import DeleteAlertDialog from "./DeleteAlertDialog";
 import styled from "styled-components";
 import { FC, useState } from "react";
+
+import AlertDialog from "./AlertDialog";
+import EditModal from "./EditModal";
 import TaskItem from "./TaskItem";
 
 const TaskList: FC = () => {
-  const [openDeleteDialog, setOpenDeleteDialog] = useState<Boolean>(false);
-  const [openEditModal, setOpenEditModal] = useState<Boolean>(false);
+  const [openDeleteAlert, setOpenDeleteAlert] = useState<boolean>(false);
+  const [openEditModal, setOpenEditModal] = useState<boolean>(false);
 
   return (
     <Container>
       <TaskItem 
-        label="Todo1"
-        id={100}
+        id={100} 
+        label="Todo1" 
+        setOpenEditModal={setOpenEditModal}
+        setOpenDeleteAlert={setOpenDeleteAlert}
       />
-      <DeleteAlertDialog 
-        title="Are you sure you want to delete this task?"
-      />
+      {openDeleteAlert &&
+        <AlertDialog 
+          title="Are you sure you want to delete this task?"
+          handleClick={() => console.log("delete")}
+          handleClose={() => setOpenDeleteAlert(false)}
+        />
+      }
+      {openEditModal && <EditModal /> }
     </Container>
   );
 };
