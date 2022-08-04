@@ -19,7 +19,7 @@ interface IProps {
 };
 
 const TasksProvider: FC<IProps> = ({ children }) => {
-  const baseURL = "http://localhost:8080/api/";
+  const baseURL = "https://todo-api-mern-exam.herokuapp.com/api";
   const axios = Axios.create({ baseURL });
   const queryClient = useQueryClient();
 
