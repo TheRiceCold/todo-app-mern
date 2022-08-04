@@ -3,7 +3,7 @@ import { FC, Dispatch, SetStateAction } from "react";
 import { useState } from "react";
 
 interface IProps {
-  noOfTasks: Number;
+  noOfTasks: Number | undefined;
   activeFilter: string;
   setActiveFilter: Dispatch<SetStateAction<string>>;
   setOpenNewModal: Dispatch<SetStateAction<boolean>>;
@@ -36,7 +36,7 @@ const Header: FC<IProps> = ({
     <header>
       <Title>{date}</Title>
       <Tools>
-        <p>{noOfTasks} {noOfTasks !== 1 ? "tasks" : "task"}</p>
+        <p>{`${noOfTasks} ${noOfTasks !== 1 ? "tasks" : "task"}`}</p>
         <div>
           {filterButtons.map(({ label, handleClick }) => (
             <FilterButton 

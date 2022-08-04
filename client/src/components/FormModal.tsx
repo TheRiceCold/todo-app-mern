@@ -10,7 +10,7 @@ interface IProps {
   selectedId?: string;
   submitLabel: string;
   handleClose: () => void;
-  handleSubmit: (e: FormEvent) => void;
+  handleSubmit: (e: FormEvent, title: string, description: string) => void;
 };
 
 const FormModal: FC<IProps> = ({ 
@@ -20,8 +20,8 @@ const FormModal: FC<IProps> = ({
   handleClose,
   handleSubmit, 
 }) => {
-  const titleRef = useRef();
-  const descriptionRef = useRef();
+  const titleRef = useRef<HTMLInputElement>(null);
+  const descriptionRef = useRef<HTMLTextAreaElement>(null);
 
   const { getTaskById } = useTasks();
   const { data: taskToEdit } = useQuery(
@@ -30,8 +30,10 @@ const FormModal: FC<IProps> = ({
     { 
       enabled: !!selectedId,
       onSuccess: task => {
-        titleRef.current.value = task.title;
-        descriptionRef.current.value = task?.description;
+        const title: HTMLInputElement | null = titleRef?.current;
+        const description: HTMLTextAreaElement | null = descriptionRef?.current;
+        title!.value = task?.title as string;
+        description!.value = task?.description as string;
       }
     }
   );
@@ -43,7 +45,11 @@ const FormModal: FC<IProps> = ({
       title={title}
       handleClose={handleClose}
     >
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={async e => { 
+        const title: HTMLInputElement | null = titleRef?.current;
+        const description: HTMLTextAreaElement | null = descriptionRef?.current;
+        await handleSubmit(e, title!.value, description!.value);
+      }}>
         <input 
           id="title" 
           type="text" 

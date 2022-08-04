@@ -25,7 +25,7 @@ const TaskList: FC<IProps> = ({
         task={task} 
         key={task._id}
         setSelectedId={setSelectedId}
-        isCompleted={task.isCompleted}
+        isCompleted={!!task.isCompleted}
         setOpenEditModal={setOpenEditModal}
         setOpenDeleteAlert={setOpenDeleteAlert}
       />

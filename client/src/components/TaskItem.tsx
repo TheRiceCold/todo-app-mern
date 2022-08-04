@@ -24,15 +24,10 @@ const TaskItem: FC<IProps> = ({
 
   const toggleCompleted = async () => {
     await updateTask(
-      task._id,
+      task._id as string,
       { isCompleted: !isCompleted }
     );
     queryClient.invalidateQueries("tasks");
-  };
-
-  const openEditHandler = () => {
-    setSelectedId(task._id);
-    setOpenEditModal(true);
   };
 
   return (
@@ -47,7 +42,10 @@ const TaskItem: FC<IProps> = ({
         <FiEdit2 
           size={16} 
           color={"#445963"} 
-          onClick={openEditHandler}
+          onClick={() => {
+            setSelectedId(task._id as string);
+            setOpenEditModal(true);
+          }}
         />
       </button>
       <button>
@@ -55,7 +53,7 @@ const TaskItem: FC<IProps> = ({
           size={16} 
           color="red" 
           onClick={() => { 
-            setSelectedId(task._id);
+            setSelectedId(task._id as string);
             setOpenDeleteAlert(true);
           }}
         />

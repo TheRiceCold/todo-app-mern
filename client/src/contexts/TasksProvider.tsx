@@ -9,6 +9,7 @@ import {
 } from "react";
 
 import ITasksContext from "../interfaces/ITasksContext";
+import ITask from "../interfaces/ITask";
 
 const TasksContext = createContext({} as ITasksContext);
 export const useTasks = () => useContext(TasksContext);
@@ -22,10 +23,9 @@ const TasksProvider: FC<IProps> = ({ children }) => {
   const axios = Axios.create({ baseURL });
   const queryClient = useQueryClient();
 
-  const createTask = async<ITask>(task) => 
-    await axios.post("todos", task);
+  const createTask = async(task: ITask) => await axios.post("todos", task);
 
-  const getTasks = async({ queryKey }) => { 
+  const getTasks = async({ queryKey }: any) => { 
     const [_, filter] = queryKey;
     let completed = filter === "completed" 
       ? "?isCompleted=true" 
@@ -36,13 +36,13 @@ const TasksProvider: FC<IProps> = ({ children }) => {
     return data;
   };
 
-  const getTaskById = async ({ queryKey }) => { 
+  const getTaskById = async ({ queryKey }: any) => { 
     const [_, id] = queryKey;
     const { data } = await axios.get(`todos/${id}`);
     return data;
   };
 
-  const updateTask = async<string, ITask>(id, task) => 
+  const updateTask = async(id: string, task: ITask) => 
     await axios.put(`todos/${id}`, task);
 
   const deleteTask = async (id: string) => 

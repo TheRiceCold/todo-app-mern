@@ -10,6 +10,7 @@ import {
   TaskList,
   Header,
 } from "./components";
+import ITask from "./interfaces/ITask";
 
 const App: FC = () => {
   const [selectedId, setSelectedId] = useState<string>("");
@@ -29,11 +30,8 @@ const App: FC = () => {
     data: tasks 
   } = useQuery(["tasks", activeFilter], getTasks);
 
-  const handleEdit = async (e: FormEvent) => {
+  const handleEdit = async (e: FormEvent, title: string, description: string) => {
     e.preventDefault();
-    const title = e.target.title.value;
-    const description = e.target.description.value;
-
     try {
       await updateTask(selectedId, { title, description });
       queryClient.invalidateQueries("tasks");
@@ -53,10 +51,9 @@ const App: FC = () => {
     }
   }
 
-  const handleCreate = async(e: FormEvent) => {
+  const handleCreate = async(e: FormEvent, title: string, description: string) => {
     e.preventDefault();
-    const title = e.target.title.value;
-    const description = e.target.description.value;
+
     try {
       await createTask({ title, description });
       queryClient.invalidateQueries("tasks");
@@ -75,7 +72,7 @@ const App: FC = () => {
         setActiveFilter={setActiveFilter}
       />
       <TaskList 
-        tasks={tasks}
+        tasks={tasks as Array<ITask>}
         loadingTasks={isLoading}
         setSelectedId={setSelectedId}
         setOpenEditModal={setOpenEditModal}
