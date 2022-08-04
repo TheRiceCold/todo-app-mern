@@ -34,8 +34,8 @@ const TaskItem: FC<IProps> = ({
     <Item>
       <input 
         type="checkbox" 
-        onChange={toggleCompleted} 
         checked={isCompleted} 
+        onChange={toggleCompleted} 
       />
       <label>{task.title}</label>
       <button>
