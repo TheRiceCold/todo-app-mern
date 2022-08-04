@@ -22,8 +22,8 @@ const TasksProvider: FC<IProps> = ({ children }) => {
   const axios = Axios.create({ baseURL });
   const queryClient = useQueryClient();
 
-  const createTask = async(title: string, description: string) => 
-    await axios.post("todos", { title, description });
+  const createTask = async<ITask>(task) => 
+    await axios.post("todos", task);
 
   const getTasks = async({ queryKey }) => { 
     const [_, filter] = queryKey;

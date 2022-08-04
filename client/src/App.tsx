@@ -17,8 +17,17 @@ const App: FC = () => {
   const [openNewModal, setOpenNewModal] = useState<boolean>(false);
   const [openEditModal, setOpenEditModal] = useState<boolean>(false);
   const [openDeleteAlert, setOpenDeleteAlert] = useState<boolean>(false);
-  const { getTasks, deleteTask, queryClient, updateTask } = useTasks();
-  const { isLoading, data: tasks } = useQuery(["tasks", activeFilter], getTasks);
+  const { 
+    getTasks, 
+    deleteTask, 
+    updateTask, 
+    createTask,
+    queryClient, 
+  } = useTasks();
+  const { 
+    isLoading, 
+    data: tasks 
+  } = useQuery(["tasks", activeFilter], getTasks);
 
   const handleEdit = async (e: FormEvent) => {
     e.preventDefault();
@@ -44,9 +53,17 @@ const App: FC = () => {
     }
   }
 
-  const handleCreate = (event: FormEvent) => {
-    event.preventDefault();
-    console.log("create");
+  const handleCreate = async(e: FormEvent) => {
+    e.preventDefault();
+    const title = e.target.title.value;
+    const description = e.target.description.value;
+    try {
+      await createTask({ title, description });
+      queryClient.invalidateQueries("tasks");
+      setOpenNewModal(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

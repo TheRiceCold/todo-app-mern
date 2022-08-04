@@ -36,7 +36,7 @@ const Header: FC<IProps> = ({
     <header>
       <Title>{date}</Title>
       <Tools>
-        <p>{noOfTasks} tasks</p>
+        <p>{noOfTasks} {noOfTasks !== 1 ? "tasks" : "task"}</p>
         <div>
           {filterButtons.map(({ label, handleClick }) => (
             <FilterButton 
