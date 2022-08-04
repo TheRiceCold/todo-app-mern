@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { useQueryClient } from "react-query";
 import { 
   createContext,
   useContext,
@@ -19,6 +20,7 @@ interface IProps {
 const TasksProvider: FC<IProps> = ({ children }) => {
   const baseURL = "http://localhost:8080/api/";
   const axios = Axios.create({ baseURL });
+  const queryClient = useQueryClient();
 
   const createTask = async(title: string, description: string) => 
     await axios.post("todos", { title, description });
@@ -39,13 +41,7 @@ const TasksProvider: FC<IProps> = ({ children }) => {
     return data;
   };
 
-  const updateTask = async (
-    id: Number, 
-    title: string, 
-    description: string, 
-    isCompleted: Boolean,
-  ) => await axios.put(`todos/${id}`, { title, description, isCompleted });
-
+  const updateTask = async<string, ITask>(id, task) => await axios.put(`todos/${id}`, task);
   const deleteTask = async (id: string) => await axios.delete(`todos/${id}`);
 
   return (
@@ -55,6 +51,7 @@ const TasksProvider: FC<IProps> = ({ children }) => {
       getTaskById,
       updateTask,
       deleteTask,
+      queryClient,
     }}>
       {children}
     </TasksContext.Provider>

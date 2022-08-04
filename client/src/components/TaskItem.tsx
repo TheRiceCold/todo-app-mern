@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useTasks } from "../contexts/TasksProvider";
 import { FC, Dispatch, SetStateAction } from "react";
 import { FiTrash2, FiEdit2 } from "react-icons/fi";
 import ITask from "../interfaces/ITask";
@@ -18,14 +19,23 @@ const TaskItem: FC<IProps> = ({
   setOpenEditModal,
   setOpenDeleteAlert,
 }) => {
+  const { updateTask, queryClient } = useTasks();
 
-  const toggleCompleted = () => {
-    
+  const toggleCompleted = async () => {
+    await updateTask(
+      task._id,
+      { isCompleted: !isCompleted }
+    );
+    queryClient.invalidateQueries("tasks");
   };
 
   return (
     <Item>
-      <input type="checkbox" onChange={toggleCompleted} checked={isCompleted} />
+      <input 
+        type="checkbox" 
+        onChange={toggleCompleted} 
+        checked={isCompleted} 
+      />
       <label>{task.title}</label>
       <button>
         <FiEdit2 

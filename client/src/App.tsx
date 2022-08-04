@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { useQuery, useQueryClient } from "react-query";
 import { useTasks } from "./contexts/TasksProvider";
 import { FC, useState, FormEvent } from "react";
+import { useQuery } from "react-query";
 import {
   AlertDialog,
   EditModal,
@@ -18,13 +18,11 @@ const App: FC = () => {
   const [openEditModal, setOpenEditModal] = useState<boolean>(false);
   const [openDeleteAlert, setOpenDeleteAlert] = useState<boolean>(false);
 
-  const queryClient = useQueryClient();
-  const { getTasks, deleteTask } = useTasks();
+  const { getTasks, deleteTask, queryClient } = useTasks();
   const { isLoading, data: tasks } = useQuery(["tasks", activeFilter], getTasks);
 
   const handleEdit = (event: FormEvent) => {
     event.preventDefault();
-    console.log(selectedId);
   };
 
   const handleDelete = async () => { 
