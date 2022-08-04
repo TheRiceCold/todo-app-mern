@@ -1,19 +1,20 @@
 import styled from "styled-components";
-import { FiTrash2, FiEdit2 } from "react-icons/fi";
 import { FC, Dispatch, SetStateAction } from "react";
+import { FiTrash2, FiEdit2 } from "react-icons/fi";
+import ITask from "../interfaces/ITask";
 
 interface IProps {
-  id: Number;
-  title: string;
+  task: ITask;
   isCompleted: boolean;
+  setSelectedId: Dispatch<SetStateAction<string>>;
   setOpenEditModal: Dispatch<SetStateAction<boolean>>;
   setOpenDeleteAlert: Dispatch<SetStateAction<boolean>>;
 };
 
 const TaskItem: FC<IProps> = ({ 
-  id, 
-  title, 
+  task,
   isCompleted,
+  setSelectedId,
   setOpenEditModal,
   setOpenDeleteAlert,
 }) => {
@@ -25,19 +26,25 @@ const TaskItem: FC<IProps> = ({
   return (
     <Item>
       <input type="checkbox" onChange={toggleCompleted} checked={isCompleted} />
-      <label>{title}</label>
+      <label>{task.title}</label>
       <button>
         <FiEdit2 
           size={16} 
           color={"#445963"} 
-          onClick={() => setOpenEditModal(true)}
+          onClick={() => {
+            setSelectedId(task._id);
+            setOpenEditModal(true);
+          }}
         />
       </button>
       <button>
         <FiTrash2 
           size={16} 
           color="red" 
-          onClick={() => setOpenDeleteAlert(true)}
+          onClick={() => { 
+            setSelectedId(task._id);
+            setOpenDeleteAlert(true);
+          }}
         />
       </button>
     </Item>

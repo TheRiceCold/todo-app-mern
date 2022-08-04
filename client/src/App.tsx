@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
+import { useQuery, useQueryClient } from "react-query";
 import { useTasks } from "./contexts/TasksProvider";
 import { FC, useState, FormEvent } from "react";
-import { useQuery } from "react-query";
 import {
   AlertDialog,
   EditModal,
@@ -12,22 +12,30 @@ import {
 } from "./components";
 
 const App: FC = () => {
+  const [selectedId, setSelectedId] = useState<string>("");
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [openNewModal, setOpenNewModal] = useState<boolean>(false);
   const [openEditModal, setOpenEditModal] = useState<boolean>(false);
   const [openDeleteAlert, setOpenDeleteAlert] = useState<boolean>(false);
 
-  const { getTasks } = useTasks();
+  const queryClient = useQueryClient();
+  const { getTasks, deleteTask } = useTasks();
   const { isLoading, data: tasks } = useQuery(["tasks", activeFilter], getTasks);
 
   const handleEdit = (event: FormEvent) => {
     event.preventDefault();
-    console.log("edit");
+    console.log(selectedId);
   };
 
-  const handleDelete = () => { 
-    console.log("delete");
-  };
+  const handleDelete = async () => { 
+    try {
+      await deleteTask(selectedId);
+      queryClient.invalidateQueries("tasks");
+      setOpenDeleteAlert(false);
+    } catch(error) {
+      console.log(error);
+    }
+  }
 
   const handleCreate = (event: FormEvent) => {
     event.preventDefault();
@@ -45,6 +53,7 @@ const App: FC = () => {
       <TaskList 
         tasks={tasks}
         loadingTasks={isLoading}
+        setSelectedId={setSelectedId}
         setOpenEditModal={setOpenEditModal}
         setOpenDeleteAlert={setOpenDeleteAlert}
       />

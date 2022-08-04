@@ -34,7 +34,7 @@ const TasksProvider: FC<IProps> = ({ children }) => {
     return data;
   };
 
-  const getTaskById = async (id: Number) => { 
+  const getTaskById = async (id: string) => { 
     const { data } = await axios.get(`todos/${id}`);
     return data;
   };
@@ -46,7 +46,7 @@ const TasksProvider: FC<IProps> = ({ children }) => {
     isCompleted: Boolean,
   ) => await axios.put(`todos/${id}`, { title, description, isCompleted });
 
-  const deleteTask = async (id: Number) => await axios.delete(`todos/${id}`);
+  const deleteTask = async (id: string) => await axios.delete(`todos/${id}`);
 
   return (
     <TasksContext.Provider value={{
