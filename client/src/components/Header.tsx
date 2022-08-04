@@ -118,22 +118,4 @@ const NewButton = styled.div`
       border: 2px solid cornflowerblue;
     }
   }
-`
-
-// const Form = styled.form`
-//   display: flex;
-//   margin-top: 10px;
-//   input {
-//     flex: 1;
-//     color: #455963;
-//     font-size: 16px;
-//     padding: 10px 20px;
-//     box-shadow: 0 -1px 0 #e2e4ea inset;
-//     &::placeholder {
-//       color: #a8b5bb;
-//     }
-//     &:focus {
-//       box-shadow: 0 -1px 0 #bdcdd6 inset;
-//     }
-//   }
-// `;
+`;

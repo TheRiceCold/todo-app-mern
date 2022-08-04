@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import ITask from "../interfaces/ITask";
 import { useTasks } from "../contexts/TasksProvider";
 import { FC, Dispatch, SetStateAction } from "react";
 import { FiTrash2, FiEdit2 } from "react-icons/fi";
-import ITask from "../interfaces/ITask";
+import { useQuery } from "react-query";
 
 interface IProps {
   task: ITask;
@@ -29,6 +30,11 @@ const TaskItem: FC<IProps> = ({
     queryClient.invalidateQueries("tasks");
   };
 
+  const openEditHandler = () => {
+    setSelectedId(task._id);
+    setOpenEditModal(true);
+  };
+
   return (
     <Item>
       <input 
@@ -41,10 +47,7 @@ const TaskItem: FC<IProps> = ({
         <FiEdit2 
           size={16} 
           color={"#445963"} 
-          onClick={() => {
-            setSelectedId(task._id);
-            setOpenEditModal(true);
-          }}
+          onClick={openEditHandler}
         />
       </button>
       <button>

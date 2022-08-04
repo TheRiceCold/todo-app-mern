@@ -19,9 +19,6 @@ describe("Todos API", () => {
       });
   });
 
-  it("GET /api/todos/:id -> specific todo by ID", () => {
-  });
-
   it("POST /api/todos/ -> created todo", () => {
     return request(app)
       .post("/api/todos")
@@ -40,10 +37,6 @@ describe("Todos API", () => {
           })
         )
       })
-  });
-
-  it("GET /api/todos -> validates request body", () => {
-     
   });
 });
 

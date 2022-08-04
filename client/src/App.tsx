@@ -17,12 +17,21 @@ const App: FC = () => {
   const [openNewModal, setOpenNewModal] = useState<boolean>(false);
   const [openEditModal, setOpenEditModal] = useState<boolean>(false);
   const [openDeleteAlert, setOpenDeleteAlert] = useState<boolean>(false);
-
-  const { getTasks, deleteTask, queryClient } = useTasks();
+  const { getTasks, deleteTask, queryClient, updateTask } = useTasks();
   const { isLoading, data: tasks } = useQuery(["tasks", activeFilter], getTasks);
 
-  const handleEdit = (event: FormEvent) => {
-    event.preventDefault();
+  const handleEdit = async (e: FormEvent) => {
+    e.preventDefault();
+    const title = e.target.title.value;
+    const description = e.target.description.value;
+
+    try {
+      await updateTask(selectedId, { title, description });
+      queryClient.invalidateQueries("tasks");
+      setOpenEditModal(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleDelete = async () => { 
@@ -67,6 +76,7 @@ const App: FC = () => {
         <EditModal 
           title="Edit Task"
           submitLabel="Update"
+          selectedId={selectedId}
           handleSubmit={handleEdit}
           handleClose={() => setOpenEditModal(false)}
         /> 
