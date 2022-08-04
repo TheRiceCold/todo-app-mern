@@ -3,36 +3,46 @@ import { FiTrash2, FiEdit2 } from "react-icons/fi";
 import { FC, Dispatch, SetStateAction } from "react";
 
 interface IProps {
-  label: string;
   id: Number;
+  title: string;
+  isCompleted: boolean;
   setOpenEditModal: Dispatch<SetStateAction<boolean>>;
   setOpenDeleteAlert: Dispatch<SetStateAction<boolean>>;
 };
 
 const TaskItem: FC<IProps> = ({ 
-  label, id, 
+  id, 
+  title, 
+  isCompleted,
   setOpenEditModal,
   setOpenDeleteAlert,
-}) => (
-  <Item>
-    <input type="checkbox" />
-    <label>{label}</label>
-    <button>
-      <FiEdit2 
-        size={16} 
-        color={"#445963"} 
-        onClick={() => setOpenEditModal(true)}
-      />
-    </button>
-    <button>
-      <FiTrash2 
-        size={16} 
-        color="red" 
-        onClick={() => setOpenDeleteAlert(true)}
-      />
-    </button>
-  </Item>
-);
+}) => {
+
+  const toggleCompleted = () => {
+    
+  };
+
+  return (
+    <Item>
+      <input type="checkbox" onChange={toggleCompleted} checked={isCompleted} />
+      <label>{title}</label>
+      <button>
+        <FiEdit2 
+          size={16} 
+          color={"#445963"} 
+          onClick={() => setOpenEditModal(true)}
+        />
+      </button>
+      <button>
+        <FiTrash2 
+          size={16} 
+          color="red" 
+          onClick={() => setOpenDeleteAlert(true)}
+        />
+      </button>
+    </Item>
+  );
+};
 
 export default TaskItem;
 

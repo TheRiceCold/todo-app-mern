@@ -1,6 +1,8 @@
-import { FC, useState, FormEvent } from "react";
 import styled from "styled-components";
 
+import { useTasks } from "./contexts/TasksProvider";
+import { FC, useState, FormEvent } from "react";
+import { useQuery } from "react-query";
 import {
   AlertDialog,
   EditModal,
@@ -10,9 +12,13 @@ import {
 } from "./components";
 
 const App: FC = () => {
+  const [activeFilter, setActiveFilter] = useState<string>("all");
   const [openNewModal, setOpenNewModal] = useState<boolean>(false);
   const [openEditModal, setOpenEditModal] = useState<boolean>(false);
   const [openDeleteAlert, setOpenDeleteAlert] = useState<boolean>(false);
+
+  const { getTasks } = useTasks();
+  const { isLoading, data: tasks } = useQuery(["tasks", activeFilter], getTasks);
 
   const handleEdit = (event: FormEvent) => {
     event.preventDefault();
@@ -30,8 +36,15 @@ const App: FC = () => {
 
   return (
     <Container>
-      <Header setOpenNewModal={setOpenNewModal} />
+      <Header 
+        noOfTasks={tasks?.length}
+        activeFilter={activeFilter}
+        setOpenNewModal={setOpenNewModal} 
+        setActiveFilter={setActiveFilter}
+      />
       <TaskList 
+        tasks={tasks}
+        loadingTasks={isLoading}
         setOpenEditModal={setOpenEditModal}
         setOpenDeleteAlert={setOpenDeleteAlert}
       />

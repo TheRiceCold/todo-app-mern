@@ -3,12 +3,19 @@ import { FC, Dispatch, SetStateAction } from "react";
 import { useState } from "react";
 
 interface IProps {
+  noOfTasks: Number;
+  activeFilter: string;
+  setActiveFilter: Dispatch<SetStateAction<string>>;
   setOpenNewModal: Dispatch<SetStateAction<boolean>>;
 };
 
-const Header: FC<IProps> = ({ setOpenNewModal }) => {
+const Header: FC<IProps> = ({ 
+  noOfTasks,
+  activeFilter,
+  setActiveFilter,
+  setOpenNewModal, 
+}) => {
   const date = new Date().toDateString();
-  const [activeFilter, setActiveFilter] = useState<String>("all");
 
   const filterButtons = [
     {
@@ -29,7 +36,7 @@ const Header: FC<IProps> = ({ setOpenNewModal }) => {
     <header>
       <Title>{date}</Title>
       <Tools>
-        <p>5 tasks</p>
+        <p>{noOfTasks} tasks</p>
         <div>
           {filterButtons.map(({ label, handleClick }) => (
             <FilterButton 

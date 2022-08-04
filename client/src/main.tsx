@@ -3,7 +3,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
 
-import TodoProvider from "./contexts/TodoProvider";
+import TasksProvider from "./contexts/TasksProvider";
 import App from "./App";
 import "./index.css";
 
@@ -15,9 +15,9 @@ createRoot(root)
     <StrictMode> 
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false}/>
-        <TodoProvider>
+        <TasksProvider>
           <App /> 
-        </TodoProvider>
+        </TasksProvider>
       </QueryClientProvider>
     </StrictMode>
   );
