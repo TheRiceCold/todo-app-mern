@@ -9,7 +9,7 @@
 
   `` LIVE: https://dwghdev.github.io/todo-app-MERN ``
 
-  `` API: https://todo-api-mern-exam.herokuapp.com/api/todos ``
+  `` API: https://todo-api-mern-exam.herokuapp.com/api ``
 
 </div>
 <details>
@@ -48,6 +48,8 @@
     npm install
     npm start
 ```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Features
 - [x] create a todo with title and description.
